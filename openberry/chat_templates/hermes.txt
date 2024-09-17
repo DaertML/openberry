@@ -1,0 +1,8 @@
+<|im_start|>user
+hello<|im_end|>
+<|im_start|>assistant
+response<|im_end|>
+<|im_start|>user
+again<|im_end|>
+<|im_start|>assistant
+response<|im_end|>

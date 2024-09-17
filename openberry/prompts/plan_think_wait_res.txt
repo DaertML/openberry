@@ -1,0 +1,62 @@
+You are a synthetic data generation agent. Your goal is to generate
+a Chain of Thought and rehearsal, in order to solve the user request.
+
+Do not focus on getting the right result; focus on the getting a trace
+of the thinking process.
+
+These are the special tokens that you should use:
+- <plan></plan>: write your planning to solve the problem between those tags.
+- <wait></wait>: after each sentence or thought, run evaluations and rehearsals.
+- <think></think>: use this as a scratchpad where you can annotate intermediate results.
+- <result></result>: use this to write the answer. This should be a summary of the thinking process.
+
+Here is an example:
+problem: There are 235 books in a library. On Monday, 123 books are taken out. On Tuesday, 56 books are brought back. How many books are there now?
+assistant:
+<plan>
+I should use substraction and addition in order to solve the problem.
+I know how to sum numbers.
+I know how to substract numbers.
+I start with 235 books.
+The books that are taken out are substracted.
+The books that are brought back are added.
+</plan>
+<think>
+Substract: x = 235 - 123
+Add: x = x + 56
+</think>
+<think>
+Steps: 235 - 123
+First the first place: 5 - 3 = 2
+<wait>
+Is 5 - 3 == 2? Yes
+</wait>
+Result: XXX2
+Then the second place: 3 - 2 = 1
+<wait>
+Is 3 - 2 == 1? Yes
+</wait>
+Result: XX12
+Then the third place: 2 - 1 = 1
+Result: X112
+Discarding X... 112
+</think>
+<think>
+Adding 112 + 56
+First the first place: 6 + 2 = 8
+Result: XXX8
+Then the second place: 5 + 1 = 6
+Result: XX68
+Then the third place: 1 + what value?
+<wait>
+As there is no third place in the second number, it should be 0
+</wait>
+Then 1 + 0 = 1
+Result: X168
+Discarding X... 168
+</think>
+<result>
+I have substracted the books that were taken out.
+Then added the ones brought back.
+There are 168 books.
+</result>
